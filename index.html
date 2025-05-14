@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レンズひずみ可視化</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="viewer">
+            <canvas id="gridCanvas"></canvas>
+            <canvas id="vectorCanvas"></canvas>
+        </div>
+        <div class="controls">
+            <div class="model-select">
+                <h3>レンズモデル</h3>
+                <select id="modelSelect">
+                    <option value="brown-conrady">Brown-Conradyモデル</option>
+                </select>
+            </div>
+            <div class="parameters">
+                <h3>カメラパラメータ</h3>
+                <div class="param-group">
+                    <label for="f">焦点距離 (f):</label>
+                    <input type="range" id="f" min="500" max="2000" value="1000" step="10">
+                    <span class="param-value" id="f-value">1000</span>
+                </div>
+                <div class="param-group">
+                    <label for="cx">主点x座標 (cx):</label>
+                    <input type="range" id="cx" min="0" max="800" value="400" step="1">
+                    <span class="param-value" id="cx-value">400</span>
+                </div>
+                <div class="param-group">
+                    <label for="cy">主点y座標 (cy):</label>
+                    <input type="range" id="cy" min="0" max="600" value="300" step="1">
+                    <span class="param-value" id="cy-value">300</span>
+                </div>
+
+                <h3>アフィン変換パラメータ</h3>
+                <div class="param-group">
+                    <label for="b1">アフィン変換 (b1):</label>
+                    <input type="range" id="b1" min="-0.1" max="0.1" value="0" step="0.001">
+                    <span class="param-value" id="b1-value">0</span>
+                </div>
+                <div class="param-group">
+                    <label for="b2">非直交性 (b2):</label>
+                    <input type="range" id="b2" min="-0.1" max="0.1" value="0" step="0.001">
+                    <span class="param-value" id="b2-value">0</span>
+                </div>
+
+                <h3>放射歪曲係数</h3>
+                <div class="param-group">
+                    <label for="k1">k1:</label>
+                    <input type="range" id="k1" min="-0.5" max="0.5" value="0.1" step="0.01">
+                    <span class="param-value" id="k1-value">0.1</span>
+                </div>
+                <div class="param-group">
+                    <label for="k2">k2:</label>
+                    <input type="range" id="k2" min="-0.5" max="0.5" value="0" step="0.01">
+                    <span class="param-value" id="k2-value">0</span>
+                </div>
+                <div class="param-group">
+                    <label for="k3">k3:</label>
+                    <input type="range" id="k3" min="-0.5" max="0.5" value="0" step="0.01">
+                    <span class="param-value" id="k3-value">0</span>
+                </div>
+                <div class="param-group">
+                    <label for="k4">k4:</label>
+                    <input type="range" id="k4" min="-0.5" max="0.5" value="0" step="0.01">
+                    <span class="param-value" id="k4-value">0</span>
+                </div>
+
+                <h3>接線歪曲係数</h3>
+                <div class="param-group">
+                    <label for="p1">p1:</label>
+                    <input type="range" id="p1" min="-0.1" max="0.1" value="0" step="0.001">
+                    <span class="param-value" id="p1-value">0</span>
+                </div>
+                <div class="param-group">
+                    <label for="p2">p2:</label>
+                    <input type="range" id="p2" min="-0.1" max="0.1" value="0" step="0.001">
+                    <span class="param-value" id="p2-value">0</span>
+                </div>
+            </div>
+
+            <div class="display-controls">
+                <h3>表示設定</h3>
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="showVectorField" checked>
+                        ベクトル場を表示
+                    </label>
+                </div>
+                <div class="control-group">
+                    <label for="correctedOpacity">補正後チェッカーボードの透明度:</label>
+                    <input type="range" id="correctedOpacity" min="0" max="1" value="0.5" step="0.1">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/utils/grid.js"></script>
+    <script src="js/utils/vector-field.js"></script>
+    <script src="js/models/brown-conrady.js"></script>
+    <script src="js/viewer.js"></script>
+    <script src="js/controls.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
