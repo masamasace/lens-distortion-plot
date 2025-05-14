@@ -46,6 +46,12 @@ class DistortionViewer {
         this.update();
     }
 
+    // ベクトル場の表示倍率設定
+    setVectorScale(scale) {
+        this.vectorRenderer.setScale(scale);
+        this.update();
+    }
+
     // 補正後グリッドの透明度設定
     setCorrectedOpacity(opacity) {
         this.correctedOpacity = opacity;

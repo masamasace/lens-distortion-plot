@@ -5,10 +5,16 @@ class VectorFieldRenderer {
         this.width = width;
         this.height = height;
         this.density = { x: 40, y: 30 }; // ベクトル場の密度
+        this.scale = 1.0; // ベクトル表示の倍率
         
         // キャンバスのサイズを設定
         this.canvas.width = width;
         this.canvas.height = height;
+    }
+
+    // 表示倍率の設定
+    setScale(scale) {
+        this.scale = scale;
     }
 
     // ベクトル場の描画
@@ -35,14 +41,13 @@ class VectorFieldRenderer {
 
     // 単一のベクトルを描画
     drawVector(x, y, dx, dy) {
-        const scale = 1.0; // ベクトルの表示スケール
-        const minLength = 2; // 表示する最小ベクトル長
+        const minLength = 2 / this.scale; // 表示する最小ベクトル長（倍率に応じて調整）
         
         const length = Math.sqrt(dx * dx + dy * dy);
-        if (length < minLength / scale) return;
+        if (length < minLength) return;
         
-        const scaledDx = dx * scale;
-        const scaledDy = dy * scale;
+        const scaledDx = dx * this.scale;
+        const scaledDy = dy * this.scale;
         
         // ベクトルの線を描画
         this.ctx.beginPath();
@@ -51,7 +56,7 @@ class VectorFieldRenderer {
         this.ctx.stroke();
         
         // ベクトルの矢印を描画
-        const arrowLength = Math.min(6, length * scale * 0.3);
+        const arrowLength = Math.min(6, length * this.scale * 0.3);
         const angle = Math.atan2(scaledDy, scaledDx);
         const arrowAngle = Math.PI / 6; // 30度
         

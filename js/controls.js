@@ -61,6 +61,17 @@ class DistortionControls {
                 this.viewer.setCorrectedOpacity(parseFloat(e.target.value));
             });
         }
+
+        // ベクトル場の表示倍率設定
+        const vectorScale = document.getElementById('vectorScale');
+        const vectorScaleValue = document.getElementById('vectorScale-value');
+        if (vectorScale && vectorScaleValue) {
+            vectorScale.addEventListener('input', (e) => {
+                const scale = parseFloat(e.target.value);
+                vectorScaleValue.textContent = scale.toFixed(1);
+                this.viewer.setVectorScale(scale);
+            });
+        }
     }
 
     // パラメータの取得
